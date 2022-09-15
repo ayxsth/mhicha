@@ -1,0 +1,15 @@
+export interface AppConfig {
+  name: string;
+  port: number;
+  version: string;
+}
+
+export interface DatabaseConfig {
+  client: string;
+  host: string;
+  name: string;
+  password: string;
+  port: number;
+  user: string;
+  timezone: string;
+}

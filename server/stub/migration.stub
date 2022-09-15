@@ -1,0 +1,23 @@
+import { Knex } from 'knex';
+
+const TABLE_NAME = 'table_name';
+
+/**
+ * Create table TABLE_NAME.
+ *
+ */
+export async function up(knex: Knex) {
+  return knex.schema.createTable(TABLE_NAME, (table) => {
+    table.bigIncrements('id').primary().unsigned();
+    table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
+    table.timestamp('updated_at');
+  });
+}
+
+/**
+ * Drop TABLE_NAME.
+ *
+ */
+export async function down(knex: Knex) {
+  return knex.schema.dropTableIfExists(TABLE_NAME);
+}

@@ -1,0 +1,20 @@
+import { Knex } from 'knex';
+
+const TABLE_NAME = 'table_name';
+
+/**
+ * Delete existing entries and seed values for TABLE_NAME.
+ *
+ */
+export function seed(knex: Knex) {
+  return knex(TABLE_NAME)
+    .del()
+    .then(() => {
+      return knex(TABLE_NAME).insert([
+        {
+          colName: 'rowValue',
+          colName2: 'rowValue'
+        }
+      ]);
+    });
+}
