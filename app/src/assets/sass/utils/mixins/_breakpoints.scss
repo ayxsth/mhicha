@@ -1,0 +1,26 @@
+@use '../../global';
+@use '../functions/utils';
+
+@mixin mqmin($size, $custom: false) {
+  @if $custom == true {
+    @media (min-width: calc($size * 1px)) {
+      @content;
+    }
+  } @else {
+    @media (min-width: utils.get( $size, global.$breakpoints-up)) {
+      @content;
+    }
+  }
+}
+
+@mixin mqmax($size, $custom: false) {
+  @if $custom == true {
+    @media (max-width: calc($size * 1px)) {
+      @content;
+    }
+  } @else {
+    @media (max-width: utils.get($size, global.$breakpoints-down)) {
+      @content;
+    }
+  }
+}

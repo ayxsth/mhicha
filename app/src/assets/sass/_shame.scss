@@ -1,6 +1,7 @@
+@use './utils';
+
 .app {
-  font-size: 3rem;
-  font-family: "Roboto", sans-serif;
+  font-size: utils.unitConversion(48, rem);
   position: absolute;
   top: 50%;
   left: 50%;

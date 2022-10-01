@@ -1,0 +1,56 @@
+@use './utils';
+@use '../../global';
+
+@function getFontWeight($key: '', $map: global.$fontWeight) {
+  $weight: utils.get($key, $map);
+
+  @return $weight;
+}
+
+@function getFontStyle($key: '', $map: global.$fontStyle) {
+  $style: utils.get($key, $map);
+
+  @return $style;
+}
+
+@function getTextAlignment($key: '', $map: global.$textAlignment) {
+  $alignment: utils.get($key, $map);
+
+  @return $alignment;
+}
+
+@function getTextDecoration($key: '', $map: global.$textDecoration) {
+  $decoration: utils.get($key, $map);
+
+  @return $decoration;
+}
+
+@function getTextCase($key: '', $map: global.$textCase) {
+  $case: utils.get($key, $map);
+
+  @return $case;
+}
+
+@function getFontSize($key: '', $map: utils.get('font', global.$fontSize)) {
+  $size: utils.get('#{$key}.font-size', $map);
+
+  @return $size;
+}
+
+@function getLineHeight($key: '', $map: utils.get('font', global.$fontSize)) {
+  $size: utils.get('#{$key}.line-height', $map);
+
+  @return $size;
+}
+
+@function getHeaderFontSize($key: '', $map: utils.get('header', global.$fontSize)) {
+  $size: utils.get('#{$key}.font-size', $map);
+
+  @return $size;
+}
+
+@function getHeaderLineHeight($key: '', $map: utils.get('header', global.$fontSize)) {
+  $size: utils.get('#{$key}.line-height', $map);
+
+  @return $size;
+}

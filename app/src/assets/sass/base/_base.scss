@@ -1,0 +1,7 @@
+@use '../global';
+
+@import url(global.$font-url);
+
+html {
+  font-family: global.$font-family;
+}

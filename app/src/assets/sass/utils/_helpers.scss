@@ -1,0 +1,317 @@
+@use 'sass:math';
+
+$cursors: pointer, default;
+$directions: column, row;
+$flexs: 1;
+$floats: left, right;
+$list-styles: disc;
+$no-of-lines: 1, 2, 3;
+$opacities: 0, 1;
+$overflows: auto, scroll, none, hidden;
+$positions: absolute, relative, sticky, fixed;
+$rotates: 180;
+$text-aligns: left, right, center;
+$word-breaks: break-all, break-word;
+$white-spaces: nowrap, normal, pre, pre-wrap;
+$justify-contents: center, flex-start, flex-end, space-between, space-around, space-evenly, stretch, auto, baseline;
+$align-items: center, flex-start, flex-end, stretch, auto, baseline;
+
+@each $justify-content in $justify-contents {
+  .justify-content-#{$justify-content} {
+    justify-content: $justify-content;
+  }
+}
+
+@each $align-item in $align-items {
+  .align-item-#{$align-item} {
+    align-items: $align-item;
+  }
+}
+
+@each $white-space in $white-spaces {
+  .white-space-#{$white-space} {
+    white-space: $white-space;
+  }
+}
+
+@each $list-style in $list-styles {
+  .list-style-#{$list-style} {
+    list-style: $list-style;
+  }
+}
+
+@each $opacity in $opacities {
+  .opacity-#{$opacity} {
+    opacity: $opacity;
+  }
+}
+
+@each $text-align in $text-aligns {
+  .text-align-#{$text-align} {
+    text-align: $text-align;
+  }
+}
+
+@each $cursor in $cursors {
+  .cursor-#{$cursor} {
+    cursor: $cursor;
+
+    &:hover {
+      cursor: $cursor;
+    }
+  }
+}
+
+@each $overflow in $overflows {
+  .overflow-#{$overflow} {
+    overflow: $overflow;
+  }
+  .overflow-x-#{$overflow} {
+    overflow-x: $overflow;
+  }
+  .overflow-y-#{$overflow} {
+    overflow-y: $overflow;
+  }
+}
+
+@each $word-break in $word-breaks {
+  .word-break-#{$word-break} {
+    word-break: $word-break;
+  }
+}
+
+@each $position in $positions {
+  .position-#{$position} {
+    position: $position;
+  }
+}
+
+@each $float in $floats {
+  .float-#{$float} {
+    float: $float;
+  }
+}
+
+@for $i from 0 through 100 {
+  $percentage: 1% * $i;
+  $px: 1px * $i;
+  $vpPercentage: 1vh * $i;
+  $size: math.div($i, 16);
+
+  .hp-#{$i} {
+    height: $percentage;
+  }
+
+  .hx-#{$i} {
+    height: $px;
+  }
+
+  .wx-#{$i} {
+    width: $px;
+  }
+
+  .hvp-#{$i} {
+    height: $vpPercentage;
+  }
+
+  .max-hvp-#{$i} {
+    max-height: $vpPercentage;
+  }
+
+  .font-size-#{$i} {
+    font-size: $size * 1rem;
+  }
+
+  .line-height-#{$i} {
+    line-height: $size * 1rem;
+  }
+
+  .gap-#{$i} {
+    gap: $size * 1rem;
+  }
+
+  .wp-#{$i} {
+    width: $percentage;
+  }
+
+  .wvp-#{$i} {
+    width: $vpPercentage;
+  }
+
+  .top-#{$i} {
+    top: $percentage;
+  }
+
+  .topx-#{$i} {
+    top: $px;
+  }
+
+  .bottom-#{$i} {
+    bottom: $percentage;
+  }
+
+  .bottomx-#{$i} {
+    bottom: $px;
+  }
+
+  .right-#{$i} {
+    right: $percentage;
+  }
+
+  .rightx-#{$i} {
+    right: $px;
+  }
+
+  .left-#{$i} {
+    left: $percentage;
+  }
+
+  .leftx-#{$i} {
+    left: $px;
+  }
+
+  .border-radius-#{$i} {
+    border-radius: $px;
+  }
+
+  .-margin-bottom-#{$i} {
+    margin-bottom: -$px;
+  }
+}
+
+@each $direction in $directions {
+  .flex-direction-#{$direction} {
+    flex-direction: $direction;
+  }
+}
+
+@each $flex in $flexs {
+  .flex-#{$flex} {
+    flex: $flex;
+  }
+}
+
+@each $rotate in $rotates {
+  .transform-rotate-#{$rotate} {
+    transform: rotate($rotate * 1deg);
+  }
+}
+
+.height-fit-content {
+  height: fit-content;
+}
+
+.bg-none {
+  background: none !important;
+}
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+}
+
+.text-overflow-ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.break-word {
+  word-wrap: break-word;
+}
+
+@each $line in $no-of-lines {
+  .text-line-#{$line} {
+    display: -webkit-box;
+    -webkit-line-clamp: $line;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.rotate-90 {
+  transform: rotate(-90deg);
+}
+
+.transform-origin {
+  transform-origin: 0 0;
+}
+
+.empty-message {
+  font-size: getFontSize('small');
+  font-weight: getFontWeight('semibold');
+}
+
+.flex {
+  display: flex;
+}
+
+.content-between {
+  justify-content: space-between;
+}
+
+.user-select-none {
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.font-weight-normal {
+  font-weight: getFontWeight('normal') !important;
+}
+
+.font-weight-semibold {
+  font-weight: getFontWeight('semibold') !important;
+}
+
+.shadow-top {
+  box-shadow: 0px -2px 2px rgba(204, 197, 197, 0.25);
+}
+
+.min-wpx-80 {
+  min-width: 80px;
+}
+
+.transform-center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.min-wpx-100 {
+  min-width: 100px;
+}
+
+.min-wpx-180 {
+  min-width: 180px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.z-index-1 {
+  z-index: 1;
+}
+
+.margin-bottom-2x {
+  margin-bottom: 2px;
+}
+
+.capitalize-first-letter {
+  &:first-letter {
+    text-transform: capitalize;
+  }
+}
+
+.hover-transparent {
+  &:hover {
+    background-color: transparent;
+  }
+}

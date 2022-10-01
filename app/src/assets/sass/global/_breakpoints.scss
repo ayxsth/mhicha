@@ -1,0 +1,13 @@
+// 640px, 1024px, 1400px
+$breakpoints-up: (
+  md: 40em,
+  lg: 64em,
+  xl: 87.5em
+);
+
+// 639px, 1023px, 1399px
+$breakpoints-down: (
+  sm: 39.9375em,
+  md: 63.9375em,
+  lg: 87.4375em
+);

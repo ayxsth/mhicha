@@ -1,0 +1,7 @@
+@use './utils';
+@use '../../global';
+
+@function getColor($key: '', $map: global.$colorMap) {
+  $color: utils.get($key, $map);
+  @return $color;
+}

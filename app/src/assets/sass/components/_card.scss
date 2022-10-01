@@ -1,0 +1,5 @@
+@use '../global';
+
+.card {
+  background-color: global.$white;
+}
