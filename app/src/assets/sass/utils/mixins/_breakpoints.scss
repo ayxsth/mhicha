@@ -7,7 +7,7 @@
       @content;
     }
   } @else {
-    @media (min-width: utils.get( $size, global.$breakpoints-up)) {
+    @media (min-width: utils.get( $size, global.$breakpoints)) {
       @content;
     }
   }
@@ -19,7 +19,7 @@
       @content;
     }
   } @else {
-    @media (max-width: utils.get($size, global.$breakpoints-down)) {
+    @media (max-width: utils.get($size, global.$breakpoints)) {
       @content;
     }
   }

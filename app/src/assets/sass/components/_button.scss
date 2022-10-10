@@ -1,0 +1,39 @@
+@use '../utils';
+
+.button {
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  font-size: utils.getFontSize(body1);
+  font-weight: utils.getFontWeight(medium);
+  border-radius: 5px;
+  color: utils.getColor('white.base');
+}
+
+.primary-button {
+  background: linear-gradient(
+    60deg,
+    utils.getColor('primary.base'),
+    utils.getColor('secondary.base'),
+    utils.getColor('secondary.hover'),
+    utils.getColor('primary.hover')
+  );
+  background-size: 300%;
+  border: none;
+
+  &:hover {
+    background-position: right;
+  }
+}
+
+.primary-outlined-button {
+  background-color: transparent;
+  outline: 2px solid utils.getColor('secondary.base');
+  outline-offset: -2px;
+  color: utils.getColor('secondary.base');
+
+  &:hover {
+    color: utils.getColor('white.base');
+    background-color: utils.getColor('secondary.base');
+  }
+}

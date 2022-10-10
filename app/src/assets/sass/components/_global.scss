@@ -1,0 +1,26 @@
+@use '../utils';
+
+.container {
+  margin: 0 auto;
+  padding: 0 15px;
+
+  @include utils.mqmin(sm) {
+    width: 100%;
+    max-width: 540px;
+  }
+
+  @include utils.mqmin(md) {
+    width: 100%;
+    max-width: 720px;
+  }
+
+  @include utils.mqmin(lg) {
+    width: 100%;
+    max-width: 960px;
+  }
+
+  @include utils.mqmin(xl) {
+    width: 100%;
+    max-width: 1280px;
+  }
+}

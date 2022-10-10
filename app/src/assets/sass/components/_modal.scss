@@ -1,0 +1,37 @@
+@use '../utils';
+
+.modal {
+  position: absolute;
+  min-width: 800px;
+  border: none;
+  background: utils.getColor('background.base');
+  overflow: auto;
+  border-radius: utils.rem(4);
+  outline: none;
+  padding: 20px;
+  height: fit-content;
+  max-height: 500px;
+
+  @include utils.e(content) {
+    margin-block: 20px;
+  }
+
+  @include utils.e(header) {
+  }
+
+  @include utils.e(body) {
+  }
+
+  @include utils.e(overlay) {
+    background-color: transparentize(utils.getColor('black.base'), 0.5);
+    position: fixed;
+    inset: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.ReactModal__Body--open {
+  overflow-y: hidden;
+}
