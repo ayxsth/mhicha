@@ -1,7 +1,48 @@
 @use '../global';
+@use '../utils';
 
 @import url(global.$font-url);
 
+* {
+  box-sizing: border-box;
+
+  &:focus {
+    outline: none;
+  }
+}
+
 html {
   font-family: global.$font-family;
+}
+
+body {
+  background-color: utils.getColor('background.base');
+}
+
+a {
+  text-decoration: none;
+  color: utils.getColor('black.base');
+}
+
+input[type='checkbox'] {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid transparent;
+  background-clip: content-box;
+
+  &:hover {
+    background-color: #a8bbbf;
+  }
 }

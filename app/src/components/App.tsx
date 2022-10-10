@@ -1,9 +1,16 @@
-import logo from '$/assets/logo.png';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+import Header from './header/Header';
 
 const App = () => {
   return (
-    <div className="app">
-      <img src={logo} className="app-logo" alt="logo" />
+    <div className="mhicha">
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<></>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 };

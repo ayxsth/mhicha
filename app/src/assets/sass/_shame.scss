@@ -1,24 +1,25 @@
 @use './utils';
 
-.app {
-  font-size: utils.unitConversion(48, rem);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.login-image {
+  border-right: 1px solid #7f01ee;
 
   img {
-    width: 300px;
-    animation: rotation infinite 3s linear;
+    width: utils.rem(300);
+  }
+}
 
-    @keyframes rotation {
-      from {
-        transform: rotate(0deg);
-      }
+.login-form {
+  max-width: utils.rem(289);
 
-      to {
-        transform: rotate(360deg);
-      }
+  .forgot-password {
+    color: utils.getColor('secondary.base');
+    font-size: utils.getFontSize(small);
+    font-weight: utils.getFontWeight(medium);
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+
+    &:hover {
+      color: utils.getColor('secondary.hover');
     }
   }
 }

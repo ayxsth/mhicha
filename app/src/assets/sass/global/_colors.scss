@@ -1,5 +1,13 @@
 $white: #fff;
 $black: #000;
+$grey: #ccc;
+$red: #ef3a25;
+$background: #f5f7fd;
+$primary-bg: #1a1a1a;
+$primary: #5b32f4;
+$primary-hover: #8862f8;
+$secondary: #0089ff;
+$secondary-hover: #00a5ff;
 
 $colorMap: (
   'white': (
@@ -7,5 +15,25 @@ $colorMap: (
   ),
   'black': (
     'base': $black
+  ),
+  'primary-bg': (
+    'base': $primary-bg
+  ),
+  'background': (
+    'base': $background
+  ),
+  'grey': (
+    'base': $grey
+  ),
+  'red': (
+    'base': $red
+  ),
+  'primary': (
+    'base': $primary,
+    'hover': $primary-hover
+  ),
+  'secondary': (
+    'base': $secondary,
+    'hover': $secondary-hover
   )
 );

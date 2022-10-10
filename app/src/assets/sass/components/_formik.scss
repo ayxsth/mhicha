@@ -1,0 +1,27 @@
+@use '../utils';
+
+.formik {
+  @include utils.e(content) {
+    margin-bottom: 10px;
+  }
+
+  @include utils.e(label) {
+    display: block;
+    width: fit-content;
+  }
+
+  @include utils.e(input) {
+    border: 1px solid #ccc;
+    border-radius: utils.rem(4);
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    font-size: utils.getFontSize(body1);
+    height: utils.rem(34);
+    width: 100%;
+
+    &:focus {
+      outline: none;
+      border-color: utils.getColor('primary.base');
+    }
+  }
+}
