@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
 
-import loginFormSchema from '$/schemas/loginFormShema';
+import InputWrapper from '$/components/input-wrapper/InputWrapper';
+import CheckboxWrapper from '$/components/checkbox-wrapper/CheckboxWrapper';
+
+import loginFormSchema from '$/schemas/loginFormSchema';
 
 interface LoginFormValues {
   email: string;
@@ -9,50 +12,35 @@ interface LoginFormValues {
   showPassword: boolean;
 }
 
-interface LoginFormErrors {
-  email?: string;
-  password?: string;
-}
-
 const LoginForm = () => {
   const initialValues: LoginFormValues = { email: '', password: '', showPassword: false };
-  const initialErrors: LoginFormErrors = {};
 
   return (
     <Formik
       initialValues={initialValues}
-      initialErrors={initialErrors}
       validationSchema={loginFormSchema}
       validateOnBlur
       onSubmit={(values: LoginFormValues) => console.log(values)}
     >
       {({ values, errors, touched }) => (
         <Form className="formik">
-          <div className="formik__content mb-10">
-            <label className="formik__label required" htmlFor="email">
-              Email
-            </label>
+          <InputWrapper label="email" touched={touched.email} error={errors.email} required>
             <Field type="text" id="email" name="email" className="formik__input" />
-            <span className="error">{touched.email && errors.email}</span>
-          </div>
-          <div className="formik__content mb-10">
-            <label className="formik__label required" htmlFor="password">
-              Password
-            </label>
+          </InputWrapper>
+
+          <InputWrapper label="password" touched={touched.password} error={errors.password} required>
             <Field
               type={values.showPassword ? 'text' : 'password'}
               id="password"
               name="password"
               className="formik__input"
             />
-            <span className="error">{touched.password && errors.password}</span>
-          </div>
-          <div className="formik__content mb-10 flex gap-5 align-items-center">
+          </InputWrapper>
+
+          <CheckboxWrapper label="Show Password">
             <Field type="checkbox" id="showPassword" name="showPassword" />
-            <label className="formik__label disable-select" htmlFor="showPassword">
-              Show Password
-            </label>
-          </div>
+          </CheckboxWrapper>
+
           <div className="formik__content mt-40 flex align-items-center justify-content-space-between">
             <button type="submit" className="button primary-button min-wpx-100">
               Login

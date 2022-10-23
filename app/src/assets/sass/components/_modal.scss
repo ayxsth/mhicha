@@ -10,16 +10,10 @@
   outline: none;
   padding: 20px;
   height: fit-content;
-  max-height: 500px;
+  max-height: 720px;
 
   @include utils.e(content) {
     margin-block: 20px;
-  }
-
-  @include utils.e(header) {
-  }
-
-  @include utils.e(body) {
   }
 
   @include utils.e(overlay) {

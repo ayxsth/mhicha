@@ -1,14 +1,14 @@
 import logo from '$/assets/logo.png';
 
-import LoginForm from './components/LoginForm';
+import RegisterForm from './components/RegisterForm';
 
-const Login = () => {
+const Register = () => {
   return (
     <div className="modal__content">
       <div className="flex">
         <div className="wp-50 flex align-items-center justify-content-center pb-x-40 login-image">
           <div className="flex flex-direction-column justify-content-center">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="mhicha" />
             <span className="text-align-center">One tap for every transaction.</span>
           </div>
         </div>
@@ -16,10 +16,10 @@ const Login = () => {
         <div className="wp-50 flex justify-content-center">
           <div className="flex align-items-center justify-content-center login-form flex-direction-column">
             <div className="modal__header mb-30">
-              <h3 className="modal__title">Login to mhicha</h3>
+              <h3 className="modal__title">Register to mhicha</h3>
             </div>
             <div className="modal__body">
-              <LoginForm />
+              <RegisterForm />
             </div>
           </div>
         </div>
@@ -28,4 +28,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

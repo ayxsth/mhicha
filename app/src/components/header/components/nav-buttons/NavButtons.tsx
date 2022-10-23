@@ -1,58 +1,44 @@
+import _ from 'lodash';
 import { useState } from 'react';
 
 import Login from '$/components/login/Login';
 import MhichaModal from '$/components/modal/Modal';
+import Register from '$/components/register/Register';
+
+import { NavBarModalType } from '$/constants/nav-buttons';
 
 const NavButtons = () => {
-  const [isRegisterOpen, setIsRegisterOpen] = useState<boolean>(false);
-  const [isLoginOpen, setIsLoginOpen] = useState<boolean>(false);
+  const [activeModal, setActiveModal] = useState<NavBarModalType>();
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const openRegisterModal = () => {
-    setIsRegisterOpen(true);
+  const openModal = (activeModal: NavBarModalType) => {
+    setActiveModal(activeModal);
+    setIsModalOpen(true);
   };
 
-  const closeRegisterModal = () => {
-    setIsRegisterOpen(false);
-  };
-
-  const openLoginModal = () => {
-    setIsLoginOpen(true);
-  };
-
-  const closeLoginModal = () => {
-    setIsLoginOpen(false);
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
     <div className="nav flex align-items-center gap-10">
       <div className="nav__button">
-        <button className="button primary-button min-wpx-100" onClick={openLoginModal}>
-          Login
+        <button className="button primary-button min-wpx-100" onClick={() => openModal(NavBarModalType.Login)}>
+          {_.capitalize(NavBarModalType.Login)}
         </button>
       </div>
 
       <div className="nav__button">
-        <button className="button primary-outlined-button min-wpx-100" onClick={openRegisterModal}>
-          Register
+        <button
+          className="button primary-outlined-button min-wpx-100"
+          onClick={() => openModal(NavBarModalType.Register)}
+        >
+          {_.capitalize(NavBarModalType.Register)}
         </button>
       </div>
 
-      <MhichaModal isOpen={isLoginOpen} closeModal={closeLoginModal}>
-        <Login />
-      </MhichaModal>
-
-      <MhichaModal isOpen={isRegisterOpen} closeModal={closeRegisterModal}>
-        <div className="modal__header">
-          <h3 className="modal__title">Register</h3>
-        </div>
-        <div className="modal__body">
-          <div className="modal__body__content">
-            <div className="modal__body__content__label">Name</div>
-            <input type="text" className="modal__body__content__input" />
-            <div className="modal__body__content__label">Email</div>
-            <input type="text" className="modal__body__content__input" />
-          </div>
-        </div>
+      <MhichaModal isOpen={isModalOpen} closeModal={closeModal}>
+        {activeModal === NavBarModalType.Login ? <Login /> : <Register />}
       </MhichaModal>
     </div>
   );
