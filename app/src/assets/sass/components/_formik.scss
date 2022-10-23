@@ -8,12 +8,16 @@
   @include utils.e(label) {
     display: block;
     width: fit-content;
+
+    &:first-letter {
+      text-transform: capitalize;
+    }
   }
 
   @include utils.e(input) {
     border: 1px solid #ccc;
     border-radius: utils.rem(4);
-    padding: 0.5rem;
+    padding-inline: 0.5rem;
     margin-top: 0.5rem;
     font-size: utils.getFontSize(body1);
     height: utils.rem(34);
