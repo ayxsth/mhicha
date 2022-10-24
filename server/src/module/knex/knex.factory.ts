@@ -1,4 +1,4 @@
-import { KNEX_CONNECTION } from '@/constant/knex.constant';
+import { KNEX_CONNECTION } from '@/common/constants/knex.constant';
 
 import { KnexService } from './knex.service';
 

@@ -11,7 +11,7 @@ const connection = {
   password: process.env.DB_PASSWORD,
   port: process.env.DB_PORT,
   user: process.env.DB_USER,
-  timezone: process.env.DB_TIMEZONE,
+  timezone: process.env.DB_TIMEZONE
 };
 
 const knexConfig: KnexConfig = {
@@ -20,12 +20,12 @@ const knexConfig: KnexConfig = {
   migrations: {
     tableName: 'migrations',
     directory: './database/migrations',
-    stub: __dirname + '/stub/migration.stub',
+    stub: __dirname + '/stub/migration.stub'
   },
   seeds: {
     directory: './database/seeds',
-    stub: __dirname + '/stub/seed.stub',
-  },
+    stub: __dirname + '/stub/seed.stub'
+  }
 };
 
 export default knexConfig;

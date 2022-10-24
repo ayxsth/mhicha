@@ -4,11 +4,13 @@ import { AppService } from './app.service';
 import { AppController } from './app.controller';
 
 import { KnexModule } from './module/knex/knex.module';
+import { UserModule } from './module/user/user.module';
+import { BcryptModule } from './module/bcrypt/bcrypt.module';
 
 import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
-  imports: [KnexModule],
+  imports: [KnexModule, UserModule, BcryptModule],
   controllers: [AppController],
   providers: [AppService]
 })
