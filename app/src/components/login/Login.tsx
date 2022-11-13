@@ -2,7 +2,12 @@ import logo from '$/assets/logo.png';
 
 import LoginForm from './components/LoginForm';
 
-const Login = () => {
+interface LoginProps {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+}
+
+const Login = ({ isLoading, setIsLoading }: LoginProps) => {
   return (
     <div className="modal__content">
       <div className="flex">

@@ -1,0 +1,132 @@
+@use '../global';
+@use '../utils';
+
+.Toastify {
+  @include utils.e(toast) {
+    border-radius: 8px !important;
+  }
+}
+
+.toast {
+  font-family: global.$font-family;
+
+  align-items: center;
+  // background-color: getColor('tertiary-green.60');
+  // background-color: green;
+  // color: utils.getColor('white.base');
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+
+  @include utils.m(success) {
+    border-left: 10px solid #47d764;
+
+    .toast {
+      @include utils.e(icon) {
+        color: #47d764;
+      }
+    }
+  }
+
+  @include utils.m(spacing) {
+    align-items: flex-start;
+    right: 3.5rem;
+    width: 370px !important;
+  }
+
+  @include utils.m(danger) {
+    // background-color: utils.getColor('tertiary-red.60');
+    border-left: 10px solid #ff355b;
+
+    .toast {
+      @include utils.e(icon) {
+        color: #ff355b;
+      }
+    }
+  }
+
+  @include utils.m(warning) {
+    // background-color: utils.getColor('tertiary-yellow.60');
+    border-left: 10px solid #ffc021;
+
+    .toast {
+      @include utils.e(icon) {
+        color: #ffc021;
+      }
+    }
+  }
+
+  @include utils.m(info) {
+    // background-color: utils.getColor('tertiary-blue.60');
+    border-left: 10px solid #2f86eb;
+
+    .toast {
+      @include utils.e(icon) {
+        color: #2f86eb;
+      }
+    }
+  }
+
+  @include utils.e(content) {
+    display: flex;
+    text-align: left;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  @include utils.e(icon) {
+    // align-self: flex-start;
+    display: flex;
+    // align-items: center;
+    line-height: 0;
+    // margin-top: 4px;
+    line-height: 1.5;
+  }
+
+  @include utils.e(title) {
+    font-weight: utils.getFontWeight('semibold');
+    color: #101020;
+    // line-height: 1.5;
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+    text-transform: capitalize;
+  }
+
+  @include utils.e(message) {
+    // line-height: 1.2;
+    color: #656565;
+    font-weight: utils.getFontWeight('normal');
+
+    @include utils.m(error-message) {
+      margin-top: 4px;
+    }
+    @include utils.m(error-list) {
+      list-style: unset;
+      margin-left: 8%;
+
+      & li {
+        line-height: 20px;
+      }
+    }
+  }
+
+  @include utils.e(container) {
+    padding: 0;
+
+    & .Toastify__toast {
+      padding: 0;
+    }
+
+    & .toast__progress-bar {
+      background: utils.getColor('white.base');
+    }
+
+    & .Toastify__toast-body {
+      border-radius: 2px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}

@@ -4,7 +4,7 @@ import { Field, Form, Formik } from 'formik';
 import InputWrapper from '$/components/input-wrapper/InputWrapper';
 import CheckboxWrapper from '$/components/checkbox-wrapper/CheckboxWrapper';
 
-import loginFormSchema from '$/schemas/loginFormSchema';
+import loginFormSchema from '$/schemas/loginForm.schema';
 
 interface LoginFormValues {
   email: string;

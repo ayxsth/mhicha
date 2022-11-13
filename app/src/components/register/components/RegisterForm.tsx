@@ -1,8 +1,22 @@
+import classNames from 'classnames';
 import { Field, Form, Formik } from 'formik';
 
+import { EllipsisLoading } from '$/components/loading';
 import InputWrapper from '$/components/input-wrapper/InputWrapper';
 
-import registerFormSchema from '$/schemas/registerFormSchema';
+import * as userServices from '$/services/user.service';
+
+import { success } from '$/utils/toast.util';
+import { handleError } from '$/utils/handleError';
+
+import registerFormSchema from '$/schemas/registerForm.schema';
+
+import { ToastMessageType, UserToastMessageType } from '$/constants/toast-message.constants';
+
+interface RegisterFormProps {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+}
 
 interface RegisterFormValues {
   name: string;
@@ -21,12 +35,12 @@ interface GenderType {
 
 const genders: GenderType[] = [
   { value: '', label: 'Select', disabled: true, hidden: true },
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-  { value: 'other', label: 'Other' }
+  { value: 'MALE', label: 'Male' },
+  { value: 'FEMALE', label: 'Female' },
+  { value: 'OTHER', label: 'Other' }
 ];
 
-const RegisterForm = () => {
+const RegisterForm = ({ isLoading, setIsLoading }: RegisterFormProps) => {
   const initialValues: RegisterFormValues = {
     name: '',
     email: '',
@@ -35,12 +49,26 @@ const RegisterForm = () => {
     password: ''
   };
 
+  const createUser = async (data: RegisterFormValues) => {
+    try {
+      setIsLoading(true);
+
+      await userServices.create(data);
+
+      success({ title: ToastMessageType.SUCCESS, message: UserToastMessageType.ADD_SUCCESS });
+    } catch (e) {
+      handleError(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={registerFormSchema}
       validateOnBlur
-      onSubmit={(values: RegisterFormValues) => console.log(values)}
+      onSubmit={(values: RegisterFormValues) => createUser(values)}
     >
       {({ errors, touched }) => (
         <Form className="formik">
@@ -71,8 +99,9 @@ const RegisterForm = () => {
           </InputWrapper>
 
           <div className="formik__content mt-40 flex align-items-center justify-content-space-between">
-            <button type="submit" className="button primary-button min-wpx-100">
-              Register
+            <button type="submit" disabled={isLoading} className="button primary-button min-wpx-100">
+              <span className={classNames({ invisible: isLoading })}>Register</span>
+              {isLoading && <EllipsisLoading color="white" position="absolute" />}
             </button>
           </div>
         </Form>

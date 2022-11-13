@@ -2,7 +2,12 @@ import logo from '$/assets/logo.png';
 
 import RegisterForm from './components/RegisterForm';
 
-const Register = () => {
+interface RegisterProps {
+  isLoading: boolean;
+  setIsLoading: (isLoading: boolean) => void;
+}
+
+const Register = ({ isLoading, setIsLoading }: RegisterProps) => {
   return (
     <div className="modal__content">
       <div className="flex">
@@ -19,7 +24,7 @@ const Register = () => {
               <h3 className="modal__title">Register to mhicha</h3>
             </div>
             <div className="modal__body">
-              <RegisterForm />
+              <RegisterForm isLoading={isLoading} setIsLoading={setIsLoading} />
             </div>
           </div>
         </div>
