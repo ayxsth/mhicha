@@ -5,11 +5,12 @@ import Login from '$/components/login/Login';
 import MhichaModal from '$/components/modal/Modal';
 import Register from '$/components/register/Register';
 
-import { NavBarModalType } from '$/constants/nav-buttons';
+import { NavBarModalType } from '$/constants/nav-buttons.constant';
 
 const NavButtons = () => {
   const [activeModal, setActiveModal] = useState<NavBarModalType>();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const openModal = (activeModal: NavBarModalType) => {
     setActiveModal(activeModal);
@@ -37,8 +38,17 @@ const NavButtons = () => {
         </button>
       </div>
 
-      <MhichaModal isOpen={isModalOpen} closeModal={closeModal}>
-        {activeModal === NavBarModalType.Login ? <Login /> : <Register />}
+      <MhichaModal
+        isOpen={isModalOpen}
+        closeModal={closeModal}
+        shouldCloseOnEsc={!isLoading}
+        shouldCloseOnOverlayClick={!isLoading}
+      >
+        {activeModal === NavBarModalType.Login ? (
+          <Login isLoading={isLoading} setIsLoading={setIsLoading} />
+        ) : (
+          <Register isLoading={isLoading} setIsLoading={setIsLoading} />
+        )}
       </MhichaModal>
     </div>
   );

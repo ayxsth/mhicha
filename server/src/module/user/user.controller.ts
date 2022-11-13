@@ -9,20 +9,24 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get()
-  findAll() {
-    return this.userService.findAll();
+  async findAll() {
+    const data = await this.userService.findAll();
+
+    return { data };
   }
 
   @Get('/:id')
-  findOrFail(@Param('id', ParseIntPipe) id: number) {
-    return this.userService.findOrFail(id);
+  async findOrFail(@Param('id', ParseIntPipe) id: number) {
+    const data = await this.userService.findOrFail(id);
+
+    return { data };
   }
 
   @Post()
   @UsePipes(ValidationPipe)
   async create(@Body() user: CreateUserDto) {
-    const [id] = await this.userService.create(user);
+    const data = await this.userService.create(user);
 
-    return this.userService.findOrFail(id);
+    return { data };
   }
 }

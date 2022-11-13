@@ -10,8 +10,9 @@ export default ({ mode }) => {
     resolve: {
       alias: [{ find: '$', replacement: path.resolve(__dirname, 'src') }]
     },
+    envPrefix: 'REACT_APP_',
     server: {
-      port: Number(process.env.PORT)
+      port: Number(process.env.REACT_APP_PORT) || 3000
     }
   });
 };

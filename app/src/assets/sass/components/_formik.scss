@@ -3,6 +3,17 @@
 .formik {
   @include utils.e(content) {
     margin-bottom: 10px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:disabled {
+        cursor: default;
+        pointer-events: none;
+      }
+    }
   }
 
   @include utils.e(label) {

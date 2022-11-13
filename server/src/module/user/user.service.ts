@@ -61,6 +61,8 @@ export class UserService {
 
     this.logger.log('Creating a new user');
 
-    return this.userModel.create({ ...user, password: hashedPassword });
+    const [id] = await this.userModel.create({ ...user, password: hashedPassword });
+
+    return this.findOrFail(id);
   }
 }

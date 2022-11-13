@@ -8,10 +8,20 @@ interface MhichaModalProps {
   className?: string;
   overlayClassName?: string;
   children?: React.ReactNode;
+  shouldCloseOnEsc?: boolean;
+  shouldCloseOnOverlayClick?: boolean;
 }
 
 const MhichaModal = (props: MhichaModalProps) => {
-  const { isOpen, closeModal, className, overlayClassName, children } = props;
+  const {
+    isOpen,
+    closeModal,
+    className,
+    overlayClassName,
+    children,
+    shouldCloseOnEsc = true,
+    shouldCloseOnOverlayClick = true
+  } = props;
 
   return (
     <Modal
@@ -21,8 +31,8 @@ const MhichaModal = (props: MhichaModalProps) => {
       overlayClassName={classNames('modal__overlay', overlayClassName)}
       ariaHideApp={false}
       preventScroll
-      shouldCloseOnEsc
-      shouldCloseOnOverlayClick
+      shouldCloseOnEsc={shouldCloseOnEsc}
+      shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
       shouldReturnFocusAfterClose
     >
       <div className="flex justify-content-flex-end">

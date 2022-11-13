@@ -371,3 +371,7 @@ $align-items: center, flex-start, flex-end, stretch, auto, baseline;
   -ms-user-select: none;
   user-select: none;
 }
+
+.invisible {
+  visibility: hidden;
+}

@@ -1,7 +1,7 @@
 import 'yup-phone';
 import * as Yup from 'yup';
 
-import { getRequiredErrorLabel } from '$/utils/string';
+import { getRequiredErrorLabel } from '$/utils/string.util';
 
 const registerFormSchema = Yup.object({
   name: Yup.string().required(getRequiredErrorLabel('name')),
