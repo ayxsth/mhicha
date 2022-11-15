@@ -1,14 +1,32 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Get,
+  Req,
+  Body,
+  Post,
+  Param,
+  UsePipes,
+  UseGuards,
+  Controller,
+  ParseIntPipe,
+  ValidationPipe
+} from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+
+import { UserService } from './user.service';
+import { AuthService } from '../auth/auth.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
 
-import { UserService } from './user.service';
+import { User } from '@/common/interface/user.interface';
+import { AuthRequest } from '@/common/interface/route.interface';
 
+import { JWT, LOCAL } from '@/common/constants/guard.constant';
 @Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly userService: UserService, private readonly authService: AuthService) {}
 
   @Get()
+  @UseGuards(AuthGuard(JWT))
   async findAll() {
     const data = await this.userService.findAll();
 
@@ -25,7 +43,17 @@ export class UserController {
   @Post()
   @UsePipes(ValidationPipe)
   async create(@Body() user: CreateUserDto) {
-    const data = await this.userService.create(user);
+    const data: User = await this.userService.create(user);
+
+    const token: string = this.authService.generateToken(data);
+
+    return { data: { ...data, token } };
+  }
+
+  @Post('/login')
+  @UseGuards(AuthGuard(LOCAL))
+  login(@Req() req: AuthRequest) {
+    const data = { token: this.authService.generateToken(req.user) };
 
     return { data };
   }

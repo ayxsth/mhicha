@@ -13,3 +13,8 @@ export interface DatabaseConfig {
   user: string;
   timezone: string;
 }
+
+export interface JwtConfig {
+  secret: string;
+  expiresIn: string;
+}

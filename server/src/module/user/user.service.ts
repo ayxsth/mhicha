@@ -40,6 +40,12 @@ export class UserService {
     return this.userModel.findBy(field, value);
   }
 
+  login(email: string) {
+    this.logger.log(`Finding a user with email ${email}`);
+
+    return this.userModel.login(email);
+  }
+
   findByOrFail(field: UserFindField, value: string) {
     this.logger.log(`Finding a user with ${field} ${value}`);
 

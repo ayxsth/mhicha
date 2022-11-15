@@ -51,4 +51,12 @@ export class UserModel extends BaseModel {
 
     return user;
   }
+
+  login(email: string) {
+    const query = this.findBy('email', email);
+
+    query.select('password');
+
+    return query;
+  }
 }

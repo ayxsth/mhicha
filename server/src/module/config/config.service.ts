@@ -4,9 +4,10 @@ import { ConfigService as NestConfigService } from '@nestjs/config';
 import { snakeCase } from 'change-case';
 import camelcaseKeys from 'camelcase-keys';
 
+import { AuthConfig } from '@/module/auth/interface/auth.interface';
 import { KnexConfig } from '@/module/knex/interfaces/knex.interface';
 
-import { AppConfig, DatabaseConfig } from './interfaces/config.interface';
+import { AppConfig, DatabaseConfig, JwtConfig } from './interfaces/config.interface';
 
 @Injectable()
 export class ConfigService {
@@ -22,6 +23,21 @@ export class ConfigService {
 
   getDatabaseConfig() {
     return this.get<DatabaseConfig>('database');
+  }
+
+  getJwtConfig() {
+    return this.get<JwtConfig>('jwt');
+  }
+
+  getAuthConfig(): AuthConfig {
+    const jwtConfig = this.getJwtConfig();
+
+    return {
+      secret: jwtConfig.secret,
+      signOptions: {
+        expiresIn: jwtConfig.expiresIn
+      }
+    };
   }
 
   getKnexConfig(): KnexConfig {
