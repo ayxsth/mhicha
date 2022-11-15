@@ -5,9 +5,10 @@ import RegisterForm from './components/RegisterForm';
 interface RegisterProps {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  closeModal?: () => void;
 }
 
-const Register = ({ isLoading, setIsLoading }: RegisterProps) => {
+const Register = ({ isLoading, setIsLoading, closeModal }: RegisterProps) => {
   return (
     <div className="modal__content">
       <div className="flex">
@@ -24,7 +25,7 @@ const Register = ({ isLoading, setIsLoading }: RegisterProps) => {
               <h3 className="modal__title">Register to mhicha</h3>
             </div>
             <div className="modal__body">
-              <RegisterForm isLoading={isLoading} setIsLoading={setIsLoading} />
+              <RegisterForm isLoading={isLoading} setIsLoading={setIsLoading} closeModal={closeModal} />
             </div>
           </div>
         </div>

@@ -45,9 +45,9 @@ const NavButtons = () => {
         shouldCloseOnOverlayClick={!isLoading}
       >
         {activeModal === NavBarModalType.Login ? (
-          <Login isLoading={isLoading} setIsLoading={setIsLoading} />
+          <Login isLoading={isLoading} setIsLoading={setIsLoading} closeModal={closeModal} />
         ) : (
-          <Register isLoading={isLoading} setIsLoading={setIsLoading} />
+          <Register isLoading={isLoading} setIsLoading={setIsLoading} closeModal={closeModal} />
         )}
       </MhichaModal>
     </div>

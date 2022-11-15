@@ -5,9 +5,10 @@ import LoginForm from './components/LoginForm';
 interface LoginProps {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  closeModal?: () => void;
 }
 
-const Login = ({ isLoading, setIsLoading }: LoginProps) => {
+const Login = ({ isLoading, setIsLoading, closeModal }: LoginProps) => {
   return (
     <div className="modal__content">
       <div className="flex">

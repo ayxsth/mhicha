@@ -16,6 +16,7 @@ import { ToastMessageType, UserToastMessageType } from '$/constants/toast-messag
 interface RegisterFormProps {
   isLoading: boolean;
   setIsLoading: (isLoading: boolean) => void;
+  closeModal?: () => void;
 }
 
 interface RegisterFormValues {
@@ -40,7 +41,7 @@ const genders: GenderType[] = [
   { value: 'OTHER', label: 'Other' }
 ];
 
-const RegisterForm = ({ isLoading, setIsLoading }: RegisterFormProps) => {
+const RegisterForm = ({ isLoading, setIsLoading, closeModal }: RegisterFormProps) => {
   const initialValues: RegisterFormValues = {
     name: '',
     email: '',
@@ -54,6 +55,8 @@ const RegisterForm = ({ isLoading, setIsLoading }: RegisterFormProps) => {
       setIsLoading(true);
 
       await userServices.create(data);
+
+      closeModal && closeModal();
 
       success({ title: ToastMessageType.SUCCESS, message: UserToastMessageType.ADD_SUCCESS });
     } catch (e) {
