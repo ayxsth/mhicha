@@ -7,7 +7,8 @@ import InputWrapper from '$/components/input-wrapper/InputWrapper';
 import * as userServices from '$/services/user.service';
 
 import { success } from '$/utils/toast.util';
-import { handleError } from '$/utils/handleError';
+import { setAccessToken } from '$/utils/token.util';
+import { handleError } from '$/utils/handle-error.util';
 
 import registerFormSchema from '$/schemas/registerForm.schema';
 
@@ -54,7 +55,9 @@ const RegisterForm = ({ isLoading, setIsLoading, closeModal }: RegisterFormProps
     try {
       setIsLoading(true);
 
-      await userServices.create(data);
+      const { data: user } = await userServices.create(data);
+
+      setAccessToken(user.token);
 
       closeModal && closeModal();
 

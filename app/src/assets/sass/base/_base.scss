@@ -17,6 +17,7 @@ html {
 
 body {
   background-color: utils.getColor('background.base');
+  overflow: overlay;
 }
 
 a {

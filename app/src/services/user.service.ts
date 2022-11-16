@@ -11,8 +11,21 @@ interface User {
   phone: string;
 }
 
+interface LoginUser {
+  email: string;
+  password: string;
+}
+
 export const create = async (body: User) => {
   const url = `${BASE_URI}${endpoints.users}`;
+
+  const { data } = await http.post(url, { body, accessToken: false });
+
+  return data;
+};
+
+export const login = async (body: LoginUser) => {
+  const url = `${BASE_URI}${endpoints.login}`;
 
   const { data } = await http.post(url, { body, accessToken: false });
 

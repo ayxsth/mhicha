@@ -25,7 +25,7 @@ const Login = ({ isLoading, setIsLoading, closeModal }: LoginProps) => {
               <h3 className="modal__title">Login to mhicha</h3>
             </div>
             <div className="modal__body">
-              <LoginForm />
+              <LoginForm isLoading={isLoading} setIsLoading={setIsLoading} closeModal={closeModal} />
             </div>
           </div>
         </div>

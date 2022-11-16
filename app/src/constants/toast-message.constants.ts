@@ -4,6 +4,7 @@ export enum ToastMessageType {
 }
 
 export enum UserToastMessageType {
+  LOGIN_SUCCESS = 'User logged in successfully',
   ADD_SUCCESS = 'User created successfully'
 }
 
