@@ -93,7 +93,7 @@ $align-items: center, flex-start, flex-end, stretch, auto, baseline;
   }
 }
 
-@for $i from 0 through 100 {
+@for $i from 0 through 200 {
   $percentage: 1% * $i;
   $px: 1px * $i;
   $vpPercentage: 1vh * $i;
@@ -197,6 +197,10 @@ $align-items: center, flex-start, flex-end, stretch, auto, baseline;
 
   .mb-x-#{$i} {
     margin-block: $px;
+  }
+
+  .pt-#{$i} {
+    padding-top: $px;
   }
 
   .pi-x-#{$i} {

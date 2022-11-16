@@ -1,0 +1,40 @@
+@use '../utils';
+
+.landing {
+  .digital-payment,
+  .app-download {
+    width: 750px;
+  }
+
+  .trust-count {
+    font-weight: utils.getFontWeight('semibold');
+    color: utils.getColor('primary.base');
+  }
+
+  .landing-section {
+    &:hover {
+      .landing-section {
+        @include utils.e(image) {
+          animation-duration: 3s;
+          animation-iteration-count: infinite;
+          animation-timing-function: ease-in-out;
+          animation-name: float;
+        }
+      }
+    }
+  }
+
+  @keyframes float {
+    0% {
+      transform: translate(0, 0px);
+    }
+
+    50% {
+      transform: translate(0, 15px);
+    }
+
+    100% {
+      transform: translate(0, 0px);
+    }
+  }
+}

@@ -1,3 +1,4 @@
 export default {
-  users: '/users'
+  users: '/users',
+  login: '/users/login'
 };

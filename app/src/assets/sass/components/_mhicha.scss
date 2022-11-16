@@ -1,0 +1,40 @@
+@use '../utils';
+
+#mhicha {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  .mhicha-header {
+    background-color: utils.getColor('primary-bg.base');
+    color: utils.getColor('white.base');
+    padding: 1rem;
+    top: 0;
+    z-index: 1;
+
+    .logo {
+      @include utils.e(img) {
+        width: 50px;
+      }
+
+      @include utils.e(label) {
+        font-size: utils.getHeaderFontSize(h4);
+        font-weight: utils.getFontWeight(semibold);
+        color: utils.getColor('white.base');
+      }
+    }
+  }
+
+  .mhicha-body {
+    display: flex;
+    flex: 1;
+    align-items: center;
+  }
+
+  .mhicha-footer {
+    background-color: utils.getColor('primary-bg.base');
+    color: utils.getColor('white.base');
+    padding: 1rem;
+  }
+}

@@ -2,19 +2,26 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Toast from './toast/Toast';
 import Header from './header/Header';
+import Footer from './footer/Footer';
+import Landing from './landing/Landing';
 
 const App = () => {
   return (
-    <div className="mhicha">
+    <>
       <BrowserRouter>
         <Header />
-        <Routes>
-          <Route path="/" element={<></>} />
-        </Routes>
+
+        <div className="mhicha-body">
+          <Routes>
+            <Route path="/" element={<Landing />} />
+          </Routes>
+        </div>
+
+        <Footer />
       </BrowserRouter>
 
       <Toast />
-    </div>
+    </>
   );
 };
 
