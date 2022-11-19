@@ -33,7 +33,18 @@ export class UserController {
     return { data };
   }
 
+  @Get('/me')
+  @UseGuards(AuthGuard(JWT))
+  async me(@Req() req: AuthRequest) {
+    const { user } = req;
+
+    const data = await this.userService.me(user.id);
+
+    return { data };
+  }
+
   @Get('/:id')
+  @UseGuards(AuthGuard(JWT))
   async findOrFail(@Param('id', ParseIntPipe) id: number) {
     const data = await this.userService.findOrFail(id);
 

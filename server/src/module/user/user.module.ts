@@ -8,9 +8,10 @@ import { UserController } from './user.controller';
 
 import { AuthModule } from '../auth/auth.module';
 import { BcryptModule } from '@/module/bcrypt/bcrypt.module';
+import { BalanceModule } from '../balance/balance.module';
 
 @Module({
-  imports: [BcryptModule, forwardRef(() => AuthModule)],
+  imports: [BcryptModule, forwardRef(() => BalanceModule), forwardRef(() => AuthModule)],
   controllers: [UserController],
   providers: [UserService, UserModel],
   exports: [UserService, UserModel]

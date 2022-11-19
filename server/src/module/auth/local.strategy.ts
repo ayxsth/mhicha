@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { Strategy } from 'passport-local';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
@@ -7,7 +8,7 @@ import { BcryptService } from '@/module/bcrypt/bcrypt.service';
 
 import { EMAIL, PASSWORD } from '@/common/constants/jwt.constant';
 
-import { User, UserWithPassword } from '@/common/interface/user.interface';
+import { User } from '@/common/interface/user.interface';
 
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
@@ -19,16 +20,14 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(email: string, password: string): Promise<User> {
-    const user: UserWithPassword = await this.userService.login(email);
+    const user: User = await this.userService.login(email);
 
-    const isValidPassword = await this.bcryptService.compare(password, user.password);
+    const isValidPassword = await this.bcryptService.compare(password, user?.password ?? '');
 
     if (!user || !isValidPassword) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('Incorrect credentials');
     }
 
-    delete user.password;
-
-    return user;
+    return _.omit(user, 'password');
   }
 }

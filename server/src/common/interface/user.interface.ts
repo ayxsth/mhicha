@@ -4,10 +4,8 @@ export interface User {
   id: number;
   name: string;
   email: string;
+  password?: string;
   gender: UserGenderType;
   status: UserStatusType;
-}
-
-export interface UserWithPassword extends User {
-  password: string;
+  balance?: number;
 }

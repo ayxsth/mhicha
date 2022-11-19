@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 import BaseModel from '@/model/BaseModel';
 
@@ -13,25 +13,13 @@ export class UserModel extends BaseModel {
   }
 
   findAll() {
-    return this.query.select('id', 'name', 'email', 'phone', 'gender', 'status').from(this.tableName);
-  }
-
-  async findOrFail(id: number) {
-    const query = this.findAll();
-
-    const user = await query.where('id', id).first();
-
-    if (!user) {
-      throw new NotFoundException(`User with id: ${id} not found!`);
-    }
-
-    return user;
+    return this.query.select('u.id', 'name', 'email', 'phone', 'gender', 'status').from({ u: this.tableName });
   }
 
   find(id: number) {
     const query = this.findAll();
 
-    return query.where('id', id).first();
+    return query.where('u.id', id).first();
   }
 
   findBy(field: string, value: string) {
@@ -40,22 +28,18 @@ export class UserModel extends BaseModel {
     return query.where(field, value).first();
   }
 
-  async findByOrFail(field: string, value: string) {
-    const query = this.findAll();
-
-    const user = await query.where(field, value).first();
-
-    if (!user) {
-      throw new NotFoundException(`User with ${field}: ${value} not found!`);
-    }
-
-    return user;
-  }
-
   login(email: string) {
-    const query = this.findBy('email', email);
+    const query = this.findBy('u.email', email);
 
     query.select('password');
+
+    return query;
+  }
+
+  me(id: number) {
+    const query = this.find(id);
+
+    query.select('amount as balance').leftJoin('balance', 'balance.user_id', 'u.id');
 
     return query;
   }
