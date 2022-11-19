@@ -1,9 +1,11 @@
-import { BadRequestException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, Injectable, Logger, NotFoundException } from '@nestjs/common';
 
 import { CreateUserDto } from './dto/create-user.dto';
 
 import { UserModel } from './model/user.model';
 
+import { KnexService } from '../knex/knex.service';
+import { BalanceService } from '../balance/balance.service';
 import { BcryptService } from '@/module/bcrypt/bcrypt.service';
 
 import { UserFindField } from '@/common/enums/user.enum';
@@ -12,7 +14,12 @@ import { UserFindField } from '@/common/enums/user.enum';
 export class UserService {
   private logger: Logger;
 
-  constructor(private readonly userModel: UserModel, private readonly bcryptService: BcryptService) {
+  constructor(
+    private readonly userModel: UserModel,
+    private readonly knexService: KnexService,
+    private readonly bcryptService: BcryptService,
+    private readonly balanceService: BalanceService
+  ) {
     this.logger = new Logger(UserService.name);
   }
 
@@ -22,10 +29,16 @@ export class UserService {
     return this.userModel.findAll();
   }
 
-  findOrFail(id: number) {
+  async findOrFail(id: number) {
     this.logger.log(`Finding a user with id ${id}`);
 
-    return this.userModel.findOrFail(id);
+    const user = await this.userModel.find(id);
+
+    if (!user) {
+      throw new NotFoundException(`User with id: ${id} not found!`);
+    }
+
+    return user;
   }
 
   find(id: number) {
@@ -46,10 +59,16 @@ export class UserService {
     return this.userModel.login(email);
   }
 
-  findByOrFail(field: UserFindField, value: string) {
+  async findByOrFail(field: UserFindField, value: string) {
     this.logger.log(`Finding a user with ${field} ${value}`);
 
-    return this.userModel.findByOrFail(field, value);
+    const user = await this.userModel.findBy(field, value);
+
+    if (!user) {
+      throw new NotFoundException(`User with ${field}: ${value} not found!`);
+    }
+
+    return user;
   }
 
   async create(user: CreateUserDto) {
@@ -67,8 +86,19 @@ export class UserService {
 
     this.logger.log('Creating a new user');
 
-    const [id] = await this.userModel.create({ ...user, password: hashedPassword });
+    const id = await this.knexService.getKnex().transaction(async (trx) => {
+      const [id] = await this.userModel.create({ ...user, password: hashedPassword });
+      await this.balanceService.create(id, trx);
+
+      return id;
+    });
 
     return this.findOrFail(id);
+  }
+
+  me(id: number) {
+    this.logger.log(`Finding a user with id ${id}`);
+
+    return this.userModel.me(id);
   }
 }

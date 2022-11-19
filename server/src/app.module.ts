@@ -7,11 +7,13 @@ import { KnexModule } from './module/knex/knex.module';
 import { UserModule } from './module/user/user.module';
 import { AuthModule } from './module/auth/auth.module';
 import { BcryptModule } from './module/bcrypt/bcrypt.module';
+import { BalanceModule } from './module/balance/balance.module';
+import { StatementModule } from './module/statement/statement.module';
 
 import { LoggerMiddleware } from './middleware/logger.middleware';
 
 @Module({
-  imports: [KnexModule, UserModule, BcryptModule, AuthModule],
+  imports: [KnexModule, UserModule, BcryptModule, AuthModule, BalanceModule, StatementModule],
   controllers: [AppController],
   providers: [AppService]
 })

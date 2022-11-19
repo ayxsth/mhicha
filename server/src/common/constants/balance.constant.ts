@@ -1,0 +1,2 @@
+export const MIN_TRANSFER_AMOUNT = 100;
+export const MAX_TRANSFER_AMOUNT = 10000;
