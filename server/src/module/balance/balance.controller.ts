@@ -2,7 +2,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { Body, Controller, Post, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { BalanceService } from './balance.service';
-import { UserService } from '../user/user.service';
+import { UserService } from '@/module/user/user.service';
 
 import { SendBalanceDto } from './dto/send-balance.dto';
 

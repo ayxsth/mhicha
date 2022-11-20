@@ -1,4 +1,4 @@
-import { StatementType } from '../enums/statement.enum';
+import { StatementType } from '@/common/enums/statement.enum';
 
 export interface Statement {
   id?: number;

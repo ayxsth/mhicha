@@ -13,7 +13,7 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 
 import { UserService } from './user.service';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '@/module/auth/auth.service';
 
 import { CreateUserDto } from './dto/create-user.dto';
 
