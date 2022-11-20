@@ -4,9 +4,9 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 import { UserModel } from './model/user.model';
 
-import { KnexService } from '../knex/knex.service';
-import { BalanceService } from '../balance/balance.service';
+import { KnexService } from '@/module/knex/knex.service';
 import { BcryptService } from '@/module/bcrypt/bcrypt.service';
+import { BalanceService } from '@/module/balance/balance.service';
 
 import { UserFindField } from '@/common/enums/user.enum';
 

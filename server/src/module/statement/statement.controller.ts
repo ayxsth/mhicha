@@ -1,5 +1,5 @@
 import { AuthGuard } from '@nestjs/passport';
-import { Controller, Get, Req, UseGuards } from '@nestjs/common';
+import { Controller, Get, Param, ParseIntPipe, Req, UseGuards } from '@nestjs/common';
 
 import { StatementService } from './statement.service';
 
@@ -13,7 +13,13 @@ export class StatementController {
 
   @Get()
   @UseGuards(AuthGuard(JWT))
-  find(@Req() req: AuthRequest) {
-    return this.statementService.find(req.user.id);
+  findAll(@Req() req: AuthRequest) {
+    return this.statementService.findAll(req.user.id);
+  }
+
+  @Get('/:id')
+  @UseGuards(AuthGuard(JWT))
+  find(@Param('id', ParseIntPipe) id: number, @Req() req: AuthRequest) {
+    return this.statementService.findOrFail(req.user.id, id);
   }
 }

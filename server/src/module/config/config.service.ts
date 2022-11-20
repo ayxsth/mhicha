@@ -68,13 +68,15 @@ export class ConfigService {
         return origImpl(snakeCase(value));
       },
       postProcessResponse: (result) => {
-        if (!Array.isArray(result)) {
-          return result;
-        }
+        //unsure about it's requirement
 
-        if (result.length === 0 || !result[0] || typeof result[0] !== 'object') {
-          return result;
-        }
+        // if (!Array.isArray(result)) {
+        //   return result;
+        // }
+
+        // if (result.length === 0 || !result[0] || typeof result[0] !== 'object') {
+        //   return result;
+        // }
 
         return camelcaseKeys(result, { deep: true });
       }

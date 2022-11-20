@@ -11,9 +11,10 @@ import { BalanceModule } from './module/balance/balance.module';
 import { StatementModule } from './module/statement/statement.module';
 
 import { LoggerMiddleware } from './middleware/logger.middleware';
+import { TransactionChargeModule } from './module/transaction-charge/transaction-charge.module';
 
 @Module({
-  imports: [KnexModule, UserModule, BcryptModule, AuthModule, BalanceModule, StatementModule],
+  imports: [KnexModule, UserModule, BcryptModule, AuthModule, BalanceModule, StatementModule, TransactionChargeModule],
   controllers: [AppController],
   providers: [AppService]
 })

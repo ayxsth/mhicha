@@ -9,6 +9,6 @@ import { StatementController } from './statement.controller';
 @Module({
   controllers: [StatementController],
   providers: [StatementService, StatementModel],
-  exports: [StatementService, StatementModel]
+  exports: [StatementService]
 })
 export class StatementModule {}
