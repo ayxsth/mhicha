@@ -39,4 +39,9 @@
       border-color: utils.getColor('primary.base');
     }
   }
+
+  @include utils.e(textarea) {
+    height: utils.rem(60);
+    padding-block: utils.rem(8);
+  }
 }

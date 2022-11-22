@@ -5,6 +5,7 @@ import { BalanceService } from './balance.service';
 import { UserService } from '@/module/user/user.service';
 
 import { SendBalanceDto } from './dto/send-balance.dto';
+import { LoadBalanceDto } from './dto/load-balance.dto';
 
 import { JWT } from '@/common/constants/guard.constant';
 
@@ -24,6 +25,15 @@ export class BalanceController {
     const receiver: User = await this.userService.findByOrFail(UserFindField.EMAIL, transfer.email);
 
     const data = await this.balanceService.transfer(req.user, receiver, transfer);
+
+    return { data };
+  }
+
+  @Post('/load')
+  @UseGuards(AuthGuard(JWT))
+  @UsePipes(ValidationPipe)
+  async load(@Req() req: AuthRequest, @Body() transfer: LoadBalanceDto) {
+    const data = await this.balanceService.load(req.user.id, transfer);
 
     return { data };
   }

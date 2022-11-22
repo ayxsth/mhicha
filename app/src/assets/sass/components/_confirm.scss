@@ -1,0 +1,29 @@
+@use '../utils';
+
+.confirm {
+  @include utils.e(body) {
+    margin-block: utils.rem(20);
+
+    @include utils.e(item) {
+      &:not(:first-child) {
+        margin-top: utils.rem(10);
+      }
+
+      &:last-child {
+        margin-top: 30px;
+        text-align: right;
+      }
+
+      .title {
+        font-size: utils.getFontSize('body1');
+      }
+
+      .value {
+        font-weight: utils.getFontWeight('medium');
+      }
+    }
+  }
+
+  @include utils.e(footer) {
+  }
+}

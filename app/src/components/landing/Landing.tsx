@@ -12,7 +12,7 @@ const Landing = () => {
               Trusted by more than <span className="trust-count">5 Million</span> users.
             </span>
             <div className="landing-buttons flex align-items-center pt-20 gap-30">
-              <button className="button primary-button hx-45">Make Transaction</button>
+              <button className="button primary-button hx-40">Make Transaction</button>
             </div>
           </div>
           <img
@@ -35,7 +35,7 @@ const Landing = () => {
                   href="https://github.com/Rinnohara9803/mhicha"
                   target="_blank"
                   rel="noreferrer"
-                  className="button primary-button hx-45 flex align-items-center"
+                  className="button primary-button hx-40 flex align-items-center"
                 >
                   Get App
                 </a>
