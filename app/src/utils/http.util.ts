@@ -27,7 +27,7 @@ const post = async (url: string, { params = {}, body = {}, accessToken = true, h
   })
     .then((response) => response)
     .catch((error) => {
-      throw error?.response.data;
+      throw error?.response?.data || error;
     });
 };
 
@@ -47,7 +47,7 @@ const put = async (url: string, { params = {}, body = {}, accessToken = true, he
   })
     .then((response) => response)
     .catch((error) => {
-      throw error?.response.data;
+      throw error?.response?.data || error;
     });
 };
 
@@ -70,7 +70,7 @@ const get = async (
   })
     .then((response) => response)
     .catch((error) => {
-      throw error?.response?.data;
+      throw error?.response?.data || error;
     });
 };
 
@@ -89,7 +89,7 @@ const del = async (url: string, { params = {}, accessToken = true, headers = {} 
   })
     .then((response) => response)
     .catch((error) => {
-      throw error?.response.data;
+      throw error?.response?.data || error;
     });
 };
 

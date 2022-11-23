@@ -29,6 +29,10 @@ input[type='checkbox'] {
   cursor: pointer;
 }
 
+textarea {
+  resize: vertical;
+}
+
 select {
   appearance: none;
   background-image: url(global.$down-arrow);
@@ -57,4 +61,11 @@ select {
   &:hover {
     background-color: #a8bbbf;
   }
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button,
+input[type='number'] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
 }

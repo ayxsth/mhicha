@@ -1,4 +1,5 @@
 export enum NavBarModalType {
   Login = 'login',
-  Register = 'register'
+  Register = 'register',
+  Logout = 'logout'
 }

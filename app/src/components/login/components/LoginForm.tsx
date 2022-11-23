@@ -1,3 +1,5 @@
+import _ from 'lodash';
+import { useContext } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Field, Form, Formik } from 'formik';
@@ -13,6 +15,8 @@ import { setAccessToken } from '$/utils/token.util';
 import { handleError } from '$/utils/handle-error.util';
 
 import loginFormSchema from '$/schemas/loginForm.schema';
+
+import UserContext from '$/context/UserContext';
 
 import { ToastMessageType, UserToastMessageType } from '$/constants/toast-message.constants';
 
@@ -31,15 +35,16 @@ interface LoginFormValues {
 const LoginForm = ({ isLoading, setIsLoading, closeModal }: LoginFormProps) => {
   const initialValues: LoginFormValues = { email: '', password: '', showPassword: false };
 
+  const { setUser } = useContext(UserContext);
+
   const login = async (data: LoginFormValues) => {
     try {
       setIsLoading(true);
 
-      const { showPassword, ...filteredData } = data;
+      const { data: newUser } = await userServices.login(_.omit(data, ['showPassword']));
 
-      const { data: user } = await userServices.login(filteredData);
-
-      setAccessToken(user.token);
+      setUser(newUser);
+      setAccessToken(newUser.token);
 
       closeModal && closeModal();
 

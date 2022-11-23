@@ -4,6 +4,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { BalanceModel } from './model/balance.model';
 
 import { SendBalanceDto } from './dto/send-balance.dto';
+import { LoadBalanceDto } from './dto/load-balance.dto';
 
 import { KnexService } from '@/module/knex/knex.service';
 import { StatementService } from '@/module/statement/statement.service';
@@ -49,13 +50,10 @@ export class BalanceService {
         transactionChargeAmount: charge
       };
 
-      this.logger.log(`Creating a statement for user with id ${sender.id}`);
       const [id] = await this.statementService.create(statement);
 
-      this.logger.log(`Updating balance for users with id ${sender.id} and ${receiver.id}`);
       await this.balanceModel.transfer(sender.id, receiver.id, transfer.amount);
 
-      this.logger.log(`Updating balance for user with id ${sender.id}`);
       await this.balanceModel.decrease(sender.id, charge);
 
       return this.statementService.find(sender.id, id);
@@ -68,5 +66,29 @@ export class BalanceService {
     this.logger.log(`Finding balance for user with id ${id}`);
 
     return this.balanceModel.find(id);
+  }
+
+  load(userId: number, transfer: LoadBalanceDto) {
+    this.logger.log(`Loading balance for user with id ${userId}`);
+
+    const statement = this.knexService.getKnex().transaction(async () => {
+      const statement = {
+        senderId: userId,
+        receiverId: userId,
+        amount: transfer.amount,
+        remark: 'Self Load',
+        type: transfer.type,
+        transactionChargeId: null,
+        transactionChargeAmount: 0
+      };
+
+      const [id] = await this.statementService.create(statement);
+
+      await this.balanceModel.increase(userId, transfer.amount);
+
+      return this.statementService.find(userId, id);
+    });
+
+    return statement;
   }
 }

@@ -21,6 +21,9 @@ import { User } from '@/common/interface/user.interface';
 import { AuthRequest } from '@/common/interface/route.interface';
 
 import { JWT, LOCAL } from '@/common/constants/guard.constant';
+
+import { UserFindField } from '@/common/enums/user.enum';
+
 @Controller('users')
 export class UserController {
   constructor(private readonly userService: UserService, private readonly authService: AuthService) {}
@@ -47,6 +50,14 @@ export class UserController {
   @UseGuards(AuthGuard(JWT))
   async findOrFail(@Param('id', ParseIntPipe) id: number) {
     const data = await this.userService.findOrFail(id);
+
+    return { data };
+  }
+
+  @Get('/:field/:email')
+  @UseGuards(AuthGuard(JWT))
+  async findByOrFail(@Param('field') field: UserFindField, @Param('email') email: string) {
+    const data = await this.userService.findByOrFail(field, email);
 
     return { data };
   }
