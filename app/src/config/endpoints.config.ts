@@ -4,6 +4,8 @@ export default {
   login: '/users/login',
   me: '/users/me',
   charge: '/transaction-charges/:amount',
+  statement: '/statements',
+  statementById: '/statements/:id',
   send: '/balances/send',
   load: '/balances/load'
 };

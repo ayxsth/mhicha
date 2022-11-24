@@ -13,13 +13,17 @@ export class StatementController {
 
   @Get()
   @UseGuards(AuthGuard(JWT))
-  findAll(@Req() req: AuthRequest) {
-    return this.statementService.findAll(req.user.id);
+  async findAll(@Req() req: AuthRequest) {
+    const data = await this.statementService.findAll(req.user.id);
+
+    return { data };
   }
 
   @Get('/:id')
   @UseGuards(AuthGuard(JWT))
-  find(@Param('id', ParseIntPipe) id: number, @Req() req: AuthRequest) {
-    return this.statementService.findOrFail(req.user.id, id);
+  async find(@Param('id', ParseIntPipe) id: number, @Req() req: AuthRequest) {
+    const data = await this.statementService.findOrFail(req.user.id, id);
+
+    return { data };
   }
 }

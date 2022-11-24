@@ -1,0 +1,60 @@
+@use '../utils';
+
+.statement-holder {
+  max-height: utils.rem(300);
+  overflow: hidden;
+  padding: utils.rem(5);
+
+  &:hover {
+    overflow: overlay;
+  }
+}
+
+.statement {
+  padding: utils.rem(14) utils.rem(12);
+  background: utils.getColor('white.base');
+  border-radius: utils.rem(4);
+  outline: 1px solid utils.getColor('primary.base');
+  cursor: pointer;
+
+  &:hover {
+    background-color: transparentize(utils.getColor('secondary.base'), 0.9);
+  }
+
+  .title {
+    span {
+      &:first-child {
+        font-weight: utils.getFontWeight('semibold');
+        font-size: utils.rem(14);
+        color: utils.getColor('primary.base');
+      }
+
+      &:last-child {
+        font-weight: 400;
+        font-size: utils.rem(12);
+      }
+    }
+  }
+
+  .amount {
+    font-weight: utils.getFontWeight('semibold');
+    font-size: utils.rem(14);
+    color: utils.getColor('primary.base');
+  }
+}
+
+.statement-details {
+  @include utils.e(item) {
+    &:not(:first-child) {
+      margin-top: utils.rem(10);
+    }
+
+    .title {
+      font-size: utils.getFontSize('body1');
+    }
+
+    .value {
+      font-weight: utils.getFontWeight('medium');
+    }
+  }
+}

@@ -1,7 +1,28 @@
+import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import appDownload from '$/assets/img/app-download.png';
 import digitalPayment from '$/assets/img/digital-payment.png';
 
+import UserContext from '$/context/UserContext';
+import LoginModalContext from '$/context/LoginModalContext';
+
+import { NavBarModalType } from '$/constants/nav-buttons.constant';
+
 const Landing = () => {
+  const { user } = useContext(UserContext);
+  const { openModal } = useContext(LoginModalContext);
+
+  const navigate = useNavigate();
+
+  const handleTransaction = () => {
+    if (user) {
+      return navigate('/send');
+    }
+
+    openModal(NavBarModalType.Login);
+  };
+
   return (
     <div className="container">
       <div className="landing">
@@ -12,7 +33,9 @@ const Landing = () => {
               Trusted by more than <span className="trust-count">5 Million</span> users.
             </span>
             <div className="landing-buttons flex align-items-center pt-20 gap-30">
-              <button className="button primary-button hx-40">Make Transaction</button>
+              <button className="button primary-button hx-40" onClick={handleTransaction}>
+                Make Transaction
+              </button>
             </div>
           </div>
           <img

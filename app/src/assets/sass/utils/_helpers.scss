@@ -379,3 +379,7 @@ $align-items: center, flex-start, flex-end, stretch, auto, baseline;
 .invisible {
   visibility: hidden;
 }
+
+.mh-auto {
+  max-height: auto;
+}

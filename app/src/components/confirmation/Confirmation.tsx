@@ -1,13 +1,16 @@
 import _ from 'lodash';
-import { useState } from 'react';
 import classNames from 'classnames';
 import { FaEdit } from 'react-icons/fa';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Fund } from '$/interfaces/fund.interface';
+import { User } from '$/interfaces/user.interface';
 
 import useUser from '$/hooks/useUser';
 import useCharge from '$/hooks/useCharge';
+
+import UserContext from '$/context/UserContext';
 
 import { success } from '$/utils/toast.util';
 import { handleError } from '$/utils/handle-error.util';
@@ -30,6 +33,8 @@ const Confirmation = ({ values, setShowConfirmation, isSelfLoad }: ConfirmationP
     ? { charge: 0, isLoading: false }
     : useCharge(+values.amount);
 
+  const { setUser } = useContext(UserContext);
+
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const navigate = useNavigate();
@@ -48,7 +53,9 @@ const Confirmation = ({ values, setShowConfirmation, isSelfLoad }: ConfirmationP
     return (
       <>
         <h1>Something went wrong!</h1>
-        <button className="button primary-button">Try Again</button>
+        <button className="button primary-button" onClick={() => setShowConfirmation(false)}>
+          Try Again
+        </button>
       </>
     );
   }
@@ -70,6 +77,19 @@ const Confirmation = ({ values, setShowConfirmation, isSelfLoad }: ConfirmationP
           email: values.email,
           remark: values.remark
         }));
+
+      setUser((prev: User | null): User | null => {
+        if (!prev?.balance || typeof charge !== 'number') {
+          return prev;
+        }
+
+        return {
+          ...prev,
+          ...(isSelfLoad
+            ? { balance: +prev.balance + +values.amount - +charge }
+            : { balance: +prev.balance - +values.amount - +charge })
+        };
+      });
 
       success({
         title: ToastMessageType.SUCCESS,

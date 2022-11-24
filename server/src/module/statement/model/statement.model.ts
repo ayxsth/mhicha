@@ -23,8 +23,7 @@ export class StatementModel extends BaseModel {
         'st.created_at'
       )
       .from({ st: this.tableName })
-      .where('st.sender_id', userId)
-      .orWhere('st.receiver_id', userId)
+      .whereRaw(`(st.sender_id = :userId OR st.receiver_id = :userId)`, { userId })
       .leftJoin('user as r', 'st.receiver_id', 'r.id')
       .leftJoin('user as s', 'st.sender_id', 's.id');
   }
