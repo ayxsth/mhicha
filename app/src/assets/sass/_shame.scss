@@ -23,3 +23,24 @@
     }
   }
 }
+
+.name,
+.coin {
+  span {
+    &:first-child {
+      display: flex;
+      align-items: center;
+    }
+
+    &:last-child {
+      font-size: utils.getFontSize(body1);
+      font-weight: utils.getFontWeight(medium);
+      color: utils.getColor('grey.base');
+    }
+  }
+}
+
+.divider {
+  color: utils.getColor('secondary.base');
+  font-weight: utils.getFontWeight(semibold);
+}

@@ -1,0 +1,27 @@
+@use '../utils';
+
+.action {
+  bottom: utils.em(30);
+  right: utils.em(30);
+
+  @include utils.e(button) {
+    width: utils.rem(50);
+    height: utils.rem(50);
+    background: utils.getColor('secondary.base');
+    color: utils.getColor('white.base');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: utils.getColor('secondary.hover');
+    }
+
+    &:not(:last-child) {
+      margin-bottom: utils.em(10);
+    }
+  }
+}
