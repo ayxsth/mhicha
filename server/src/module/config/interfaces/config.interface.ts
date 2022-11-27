@@ -18,3 +18,12 @@ export interface JwtConfig {
   secret: string;
   expiresIn: string;
 }
+
+export interface MailerConfig {
+  host: string;
+  service: string;
+  auth: {
+    user: string;
+    pass: string;
+  };
+}

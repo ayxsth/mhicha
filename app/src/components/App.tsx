@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Toast from './toast/Toast';
 import Header from './header/Header';
@@ -24,6 +24,7 @@ import UserContext from '$/context/UserContext';
 import LoginModalContext from '$/context/LoginModalContext';
 
 import { NavBarModalType } from '$/constants/nav-buttons.constant';
+import ServiceFund from './transfer-load/ServiceFund';
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -95,10 +96,12 @@ const App = () => {
                 <Route element={<AuthorizedRoute />}>
                   <Route path="/send" element={<TransferFund />} />
                   <Route path="/load" element={<LoadFund />} />
+                  <Route path="/service/:id" element={<ServiceFund />} />
                   <Route path="/statement" element={<Statement />} />
                 </Route>
 
                 <Route path="/" element={<Landing />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>
 

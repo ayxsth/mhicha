@@ -1,5 +1,5 @@
 import { AuthGuard } from '@nestjs/passport';
-import { Body, Controller, Post, Req, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Post, Req, UseGuards, UseInterceptors, UsePipes, ValidationPipe } from '@nestjs/common';
 
 import { BalanceService } from './balance.service';
 import { UserService } from '@/module/user/user.service';
@@ -13,14 +13,16 @@ import { UserFindField } from '@/common/enums/user.enum';
 
 import { User } from '@/common/interface/user.interface';
 import { AuthRequest } from '@/common/interface/route.interface';
+import { SelfTransferInterceptor } from '@/interceptors/self-transfer.interceptor';
 
+@UseGuards(AuthGuard(JWT))
+@UsePipes(ValidationPipe)
 @Controller('balances')
 export class BalanceController {
   constructor(private readonly balanceService: BalanceService, private readonly userService: UserService) {}
 
+  @UseInterceptors(SelfTransferInterceptor)
   @Post('/send')
-  @UseGuards(AuthGuard(JWT))
-  @UsePipes(ValidationPipe)
   async send(@Req() req: AuthRequest, @Body() transfer: SendBalanceDto) {
     const receiver: User = await this.userService.findByOrFail(UserFindField.EMAIL, transfer.email);
 
@@ -30,8 +32,6 @@ export class BalanceController {
   }
 
   @Post('/load')
-  @UseGuards(AuthGuard(JWT))
-  @UsePipes(ValidationPipe)
   async load(@Req() req: AuthRequest, @Body() transfer: LoadBalanceDto) {
     const data = await this.balanceService.load(req.user.id, transfer);
 

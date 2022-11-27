@@ -1,3 +1,4 @@
+import { useContext } from 'react';
 import classNames from 'classnames';
 import { Field, Form, Formik } from 'formik';
 
@@ -11,6 +12,8 @@ import { setAccessToken } from '$/utils/token.util';
 import { handleError } from '$/utils/handle-error.util';
 
 import registerFormSchema from '$/schemas/registerForm.schema';
+
+import UserContext from '$/context/UserContext';
 
 import { ToastMessageType, UserToastMessageType } from '$/constants/toast-message.constants';
 
@@ -43,6 +46,8 @@ const genders: GenderType[] = [
 ];
 
 const RegisterForm = ({ isLoading, setIsLoading, closeModal }: RegisterFormProps) => {
+  const { setUser } = useContext(UserContext);
+
   const initialValues: RegisterFormValues = {
     name: '',
     email: '',
@@ -57,6 +62,7 @@ const RegisterForm = ({ isLoading, setIsLoading, closeModal }: RegisterFormProps
 
       const { data: user } = await userServices.create(data);
 
+      setUser(user);
       setAccessToken(user.token);
 
       closeModal && closeModal();

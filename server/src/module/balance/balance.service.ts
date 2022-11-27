@@ -10,6 +10,8 @@ import { KnexService } from '@/module/knex/knex.service';
 import { StatementService } from '@/module/statement/statement.service';
 import { TransactionChargeService } from '@/module/transaction-charge/transaction-charge.service';
 
+import { EmailService } from '@/module/email/email.service';
+
 import { User } from '@/common/interface/user.interface';
 
 @Injectable()
@@ -19,6 +21,7 @@ export class BalanceService {
   constructor(
     private readonly balanceModel: BalanceModel,
     private readonly knexService: KnexService,
+    private readonly emailService: EmailService,
     private readonly statementService: StatementService,
     private readonly transactionChargeService: TransactionChargeService
   ) {
@@ -58,6 +61,8 @@ export class BalanceService {
 
       return this.statementService.find(sender.id, id);
     });
+
+    this.emailService.sendTransferMail(sender.email, receiver.email, sender.name, receiver.name, transfer.amount);
 
     return statement;
   }
