@@ -7,5 +7,7 @@ export default {
   statement: '/statements',
   statementById: '/statements/:id',
   send: '/balances/send',
-  load: '/balances/load'
+  load: '/balances/load',
+  services: '/services',
+  servicesById: '/services/:id'
 };

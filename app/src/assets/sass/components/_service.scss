@@ -1,0 +1,41 @@
+@use '../utils';
+
+.services {
+  background: transparentize(utils.getColor('primary.base'), 0.9);
+  padding: 10px;
+  border-radius: utils.rem(4);
+  gap: utils.rem(10);
+}
+
+.service-wrapper {
+  height: utils.rem(120);
+  width: utils.rem(120);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: utils.getColor('white.base');
+  border: 2px solid utils.getColor('secondary.base');
+  border-radius: utils.rem(4);
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: transparentize(utils.getColor('secondary.base'), 0.9);
+  }
+}
+
+.service {
+  gap: utils.rem(2);
+
+  @include utils.e(icon) {
+    img {
+      height: utils.rem(75);
+      width: utils.rem(75);
+    }
+  }
+
+  @include utils.e(name) {
+    font-size: utils.getFontSize('body1');
+    font-weight: utils.getFontWeight('semibold');
+  }
+}

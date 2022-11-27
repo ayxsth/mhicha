@@ -1,0 +1,6 @@
+export enum ServiceType {
+  TOP_UP = 'TOP UP',
+  ENTERTAINMENT = 'ENTERTAINMENT',
+  FOOD = 'FOOD',
+  ONLINE_SHOPPING = 'ONLINE SHOPPING'
+}

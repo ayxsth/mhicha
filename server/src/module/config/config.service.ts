@@ -7,7 +7,7 @@ import camelcaseKeys from 'camelcase-keys';
 import { AuthConfig } from '@/module/auth/interface/auth.interface';
 import { KnexConfig } from '@/module/knex/interfaces/knex.interface';
 
-import { AppConfig, DatabaseConfig, JwtConfig } from './interfaces/config.interface';
+import { AppConfig, DatabaseConfig, JwtConfig, MailerConfig } from './interfaces/config.interface';
 
 @Injectable()
 export class ConfigService {
@@ -27,6 +27,25 @@ export class ConfigService {
 
   getJwtConfig() {
     return this.get<JwtConfig>('jwt');
+  }
+
+  getEmailConfig() {
+    return this.get<MailerConfig>('mailer');
+  }
+
+  getMailerConfig() {
+    const mailerConfig = this.getEmailConfig();
+
+    return {
+      transport: {
+        host: mailerConfig.host,
+        service: mailerConfig.service,
+        auth: {
+          user: mailerConfig.auth.user,
+          pass: mailerConfig.auth.pass
+        }
+      }
+    };
   }
 
   getAuthConfig(): AuthConfig {

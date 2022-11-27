@@ -1,6 +1,11 @@
-import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
+import { Controller, Get, Param, ParseIntPipe, UseGuards } from '@nestjs/common';
+
+import { JWT } from '@/common/constants/guard.constant';
+
 import { TransactionChargeService } from './transaction-charge.service';
 
+@UseGuards(AuthGuard(JWT))
 @Controller('transaction-charges')
 export class TransactionChargeController {
   constructor(private readonly transactionChargeService: TransactionChargeService) {}

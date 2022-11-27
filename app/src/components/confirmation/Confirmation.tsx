@@ -25,9 +25,11 @@ interface ConfirmationProps {
   values: Fund;
   setShowConfirmation: (showConfirmation: boolean) => void;
   isSelfLoad?: boolean;
+  isService?: boolean;
+  serviceName?: string;
 }
 
-const Confirmation = ({ values, setShowConfirmation, isSelfLoad }: ConfirmationProps) => {
+const Confirmation = ({ values, setShowConfirmation, isSelfLoad, isService, serviceName = '' }: ConfirmationProps) => {
   const { user, isLoading: isLoadingUser } = useUser(values.email);
   const { charge, isLoading: isLoadingCharge } = isSelfLoad
     ? { charge: 0, isLoading: false }
@@ -79,7 +81,7 @@ const Confirmation = ({ values, setShowConfirmation, isSelfLoad }: ConfirmationP
         }));
 
       setUser((prev: User | null): User | null => {
-        if (!prev?.balance || typeof charge !== 'number') {
+        if (typeof prev?.balance !== 'number' || typeof charge !== 'number') {
           return prev;
         }
 
@@ -123,14 +125,16 @@ const Confirmation = ({ values, setShowConfirmation, isSelfLoad }: ConfirmationP
 
         <div className="confirm__body">
           <div className="confirm__body__item flex gap-6 flex-direction-column">
-            <div className="title">{isSelfLoad ? 'Name' : 'Receiver Name'}</div>
-            <div className="value">{user && user.name}</div>
+            <div className="title">{isSelfLoad ? 'Name' : isService ? 'Service Name' : 'Receiver Name'}</div>
+            <div className="value">{isService ? serviceName : user && user.name}</div>
           </div>
 
-          <div className="confirm__body__item flex gap-6 flex-direction-column">
-            <div className="title">{isSelfLoad ? 'Email' : 'Receiver Email'}</div>
-            <div className="value">{user && user.email}</div>
-          </div>
+          {!isService && (
+            <div className="confirm__body__item flex gap-6 flex-direction-column">
+              <div className="title">{isSelfLoad ? 'Email' : 'Receiver Email'}</div>
+              <div className="value">{user && user.email}</div>
+            </div>
+          )}
 
           <div className="confirm__body__item flex gap-6 flex-direction-column">
             <div className="title">Amount</div>

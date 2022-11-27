@@ -7,6 +7,7 @@ import digitalPayment from '$/assets/img/digital-payment.png';
 import UserContext from '$/context/UserContext';
 import LoginModalContext from '$/context/LoginModalContext';
 
+import Services from '../service/Services';
 import { NavBarModalType } from '$/constants/nav-buttons.constant';
 
 const Landing = () => {
@@ -44,6 +45,9 @@ const Landing = () => {
             alt="Digital Payment"
           />
         </div>
+
+        <Services />
+
         <div className="download">
           <div className="landing-section flex align-items-center justify-content-between mb-x-100">
             <img
