@@ -65,7 +65,7 @@ export class EmailService {
           </head>
           <body>
             <p>Hi ${receiverName},</p>
-            <p>You have successfully received <b>Rs. ${amount}<b> from <b>${senderName}</b>.</p>
+            <p>You have successfully received <b>Rs. ${amount}</b> from <b>${senderName}</b>.</p>
             <br />
             <p><i>Note: This is a system generated email. Please do not reply to this email.</i></p>
             <br />
